@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/page.jsx",
+    "src/app/layout.jsx",
+    "src/app/services/branding/page.jsx",
+    "src/app/services/media-production/page.jsx",
+    "src/app/services/web-app-development/page.jsx",
+    "src/app/works/work.tsx",
+    "src/app/about/page.jsx",
+    "src/app/services/digital-marketing/page.jsx",
+    "src/app/book-call/page.jsx",
+    "src/app/blogs/page.jsx",
+    "src/app/blogs/[slug]/page.jsx",
+    "src/app/api/submit-inquiry/route.ts",
+    "src/app/services/page.jsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

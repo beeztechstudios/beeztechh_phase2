@@ -1,0 +1,45 @@
+/* ✅ Required Tailwind directives */
+@import "tailwindcss";
+
+/* ✅ Custom variables */
+:root {
+  --font-roboto: "Roboto", sans-serif;
+  --font-bitcount: "Bitcount Prop Single Ink", sans-serif;
+  --font-epilogue: "Epilogue", sans-serif;
+  --font-fira-sans: "Fira Sans", sans-serif;
+  
+}
+
+/* Custom animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+/* Base global rules */
+html,
+body {
+  overflow-x: hidden !important;
+}
+
+/* Blog content: always render links in blue regardless of surrounding marks */
+.portable-content a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(37, 99, 235, 0.4) !important;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.portable-content a:hover {
+  color: #1d4ed8 !important;
+}
+

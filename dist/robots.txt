@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.beeztech.studio
+
+# Sitemaps
+Sitemap: https://www.beeztech.studio/sitemap.xml
