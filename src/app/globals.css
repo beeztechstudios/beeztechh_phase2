@@ -1,13 +1,57 @@
 /* ✅ Required Tailwind directives */
 @import "tailwindcss";
 
-/* ✅ Custom variables */
+/* ─────────────────────────────────────────────
+   Custom Font Faces
+   ───────────────────────────────────────────── */
+
+/* Resonate – Variable Font (supports all weights) */
+@font-face {
+  font-family: "Resonate";
+  src: url("/fonts/resonate/RASONATE-VF.TTF") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* STK Bureau Serif – Regular */
+@font-face {
+  font-family: "STK Bureau Serif";
+  src: url("/fonts/stk-bureau-serif/STKBureauSerif-Regular.woff2") format("woff2"),
+       url("/fonts/stk-bureau-serif/STKBureauSerif-Regular.woff") format("woff"),
+       url("/fonts/stk-bureau-serif/STKBureauSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* STK Bureau Serif – Bold (add if you have the bold variant) */
+@font-face {
+  font-family: "STK Bureau Serif";
+  src: url("/fonts/stk-bureau-serif/STKBureauSerif-Bold.woff2") format("woff2"),
+       url("/fonts/stk-bureau-serif/STKBureauSerif-Bold.woff") format("woff"),
+       url("/fonts/stk-bureau-serif/STKBureauSerif-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────
+   Tailwind v4 Theme – Custom Font Families
+   ───────────────────────────────────────────── */
+@theme {
+  --font-resonate: "Resonate", sans-serif;
+  --font-stk-bureau: "STK Bureau Serif", serif;
+}
+
+/* ─────────────────────────────────────────────
+   Custom variables (legacy)
+   ───────────────────────────────────────────── */
 :root {
   --font-roboto: "Roboto", sans-serif;
   --font-bitcount: "Bitcount Prop Single Ink", sans-serif;
   --font-epilogue: "Epilogue", sans-serif;
   --font-fira-sans: "Fira Sans", sans-serif;
-  
 }
 
 /* Custom animations */
@@ -42,4 +86,3 @@ body {
 .portable-content a:hover {
   color: #1d4ed8 !important;
 }
-
