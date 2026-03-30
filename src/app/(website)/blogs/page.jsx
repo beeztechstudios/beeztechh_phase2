@@ -67,7 +67,7 @@ export const metadata = {
 
 
 
-import { client } from '@/lib/sanity';
+import { client } from "../../../../sanity";
 import { groq } from 'next-sanity';
 
 async function getPosts() {

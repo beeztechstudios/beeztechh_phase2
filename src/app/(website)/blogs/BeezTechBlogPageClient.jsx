@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../../../../sanity";
 
 const BeezTechBlogPageClient = ({ posts = [] }) => {
     const featuredPost = posts[0];

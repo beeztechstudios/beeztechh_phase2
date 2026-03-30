@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { ArrowLeft, Clock } from 'lucide-react';
 import ContentRenderer from '@/components/Blogs/BeezTechContentRenderer';
-import { client, urlFor } from '@/lib/sanity';
+import { client, urlFor } from '../../../../sanity';
 import { groq } from 'next-sanity';
 import Link from 'next/link';
 
