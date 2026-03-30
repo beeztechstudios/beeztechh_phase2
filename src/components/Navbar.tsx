@@ -319,9 +319,6 @@ export default function Navbar() {
                           <h3 className="text-gray-900 font-bold text-base mb-1">
                             {service.title}
                           </h3>
-                          <p className="text-gray-600 text-sm line-clamp-2">
-                            {service.description}
-                          </p>
                         </div>
                       </div>
                     </Link>
