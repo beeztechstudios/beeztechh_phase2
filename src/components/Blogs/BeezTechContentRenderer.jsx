@@ -1,6 +1,6 @@
 import React from "react";
 import { PortableText } from "@portabletext/react";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../../../sanity";
 
 const components = {
   block: {

@@ -7,46 +7,46 @@ import gsap from "gsap";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const avatarsRef = useRef([]);
+  const avatarsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleMouseEnter = () => {
-  const tl = gsap.timeline();
+    const tl = gsap.timeline();
 
-  // Step 1: Lift up (ALL together)
-  tl.to(avatarsRef.current, {
-    y: -5,
-    scale: 1.05,
-    duration: 0.25,
-    ease: "power2.out",
-  });
+    // Step 1: Lift up (ALL together)
+    tl.to(avatarsRef.current, {
+      y: -5,
+      scale: 1.05,
+      duration: 0.25,
+      ease: "power2.out",
+    });
 
-  // Step 2: Spread in curve (staggered)
-  tl.to(
-    avatarsRef.current,
-    {
-      x: (i) => i * 42,
-      y: (i) => -35 - Math.sin(i * 0.8) * 20, // curve effect 🔥
-      rotate: (i) => i * 8,
-      scale: 1.5,
-      duration: 0.35,
+    // Step 2: Spread in curve (staggered)
+    tl.to(
+      avatarsRef.current,
+      {
+        x: (i) => i * 42,
+        y: (i) => -35 - Math.sin(i * 0.8) * 20, // curve effect 🔥
+        rotate: (i) => i * 8,
+        scale: 1.5,
+        duration: 0.35,
+        ease: "power3.out",
+        stagger: 0.05,
+      },
+      "-=0.1" // overlap for smoothness
+    );
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(avatarsRef.current, {
+      x: 0,
+      y: 0,
+      rotate: 0,
+      scale: 1,
+      duration: 0.4,
       ease: "power3.out",
       stagger: 0.05,
-    },
-    "-=0.1" // overlap for smoothness
-  );
-};
-
-const handleMouseLeave = () => {
-  gsap.to(avatarsRef.current, {
-    x: 0,
-    y: 0,
-    rotate: 0,
-    scale: 1,
-    duration: 0.4,
-    ease: "power3.out",
-    stagger: 0.05,
-  });
-};
+    });
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const handleMouseLeave = () => {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100 font-resonate">
+    <footer className=" border-t border-gray-100 font-resonate">
       {/* ── Top Section ── */}
       <div className="max-w-[1300px]  mx-auto px-6 lg:px-10 pt-12 pb-10">
         <div className="flex flex-col  md:flex-row items-start md:items-center justify-between gap-8">
@@ -71,7 +71,9 @@ const handleMouseLeave = () => {
                 (src, i) => (
                   <div
                     key={i}
-                    ref={(el) => (avatarsRef.current[i] = el)}
+                    ref={(el) => {
+                      avatarsRef.current[i] = el;
+                    }}
                     className={`relative w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-md
           ${i !== 0 ? "-ml-5" : ""}
         `}
@@ -225,7 +227,7 @@ const handleMouseLeave = () => {
             </p>
             <form
               onSubmit={handleSubscribe}
-              className="flex items-center border border-[#0707071A] rounded-full px-4 py-2.5 mb-3 max-w-[320px] focus-within:border-black transition-colors"
+              className="flex items-center bg-white border border-[#0707071A] rounded-full px-4 py-2.5 mb-3 max-w-[320px] focus-within:border-black transition-colors"
             >
               <input
                 type="email"
