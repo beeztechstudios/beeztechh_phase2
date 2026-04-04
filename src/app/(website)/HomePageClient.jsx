@@ -1,15 +1,8 @@
 "use client";
-
-import { useRef, useEffect, Suspense } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-import Portfolio from "@/components/Portfolio";
-import HeroSection from "@/components/HeroSection";
-import Slider from "@/components/Slider";
-import ServicesSection from "@/components/ServicesSectionHome";
-import AboutUsSection from "@/components/AboutUsSection";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -39,9 +32,43 @@ const teamData = [
   },
 ];
 
+const advantageData = [
+  {
+    feature: "Strategic approach",
+    beeztech: "Clear strategy & planning before every project",
+    others: "Focus mainly on project delivery",
+  },
+  {
+    feature: "Design quality",
+    beeztech: "Research-driven design and development",
+    others: "Standard design approach",
+  },
+  {
+    feature: "Team expertise",
+    beeztech: "Skilled team across\ndesign, development & branding",
+    others: "Limited specialization",
+  },
+  {
+    feature: "Delivery speed",
+    beeztech: "Fast & structured delivery process",
+    others: "Limited flexibility",
+  },
+  {
+    feature: "Scalable solutions",
+    beeztech: "Easily scalable solutions for growing businesses",
+    others: "Slower processes",
+  },
+  {
+    feature: "Ongoing support",
+    beeztech: "Dedicated support & long-term partnership",
+    others: "Limited support",
+  },
+];
+
 export default function HomePageClient() {
   const servicesRef = useRef(null);
   const leadershipRef = useRef(null);
+  const advantageRef = useRef(null);
   const teamMembersRef = useRef([]);
 
   useEffect(() => {
@@ -72,13 +99,129 @@ export default function HomePageClient() {
           start: "top 80%",
         },
       });
-    }, leadershipRef);
+
+      // Advantage Section Animations
+      gsap.from(".advantage-header", {
+        opacity: 0,
+        y: 60,
+        duration: 1.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".advantage-header",
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(".advantage-table-row", {
+        opacity: 0,
+        y: 30,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".advantage-table",
+          start: "top 80%",
+        },
+      });
+    }, advantageRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main className="w-full overflow-x-hidden bg-transparent">
+    <main className="w-full overflow-x-hidden ">
+      {/* Advantage Section */}
+      <section>
+        <div className="max-w-[1400px] mx-auto text-center">
+          {/* Header */}
+          <div className="advantage-header mb-24">
+            <p className="text-[#070707] font-resonate font-normal md:text-[14px] lg:text-[18px] mb-6 leading-[100%]">
+              Why choose Beeztech
+            </p>
+            <h2 className="text-[24px] md:text-[36px] lg:text-[52px] leading-[1.2] text-[#070707] tracking-[-1.2%] font-stk-bureau ">
+              The <span className="font-medium font-resonate">Beeztech</span>{" "}
+              advantage
+            </h2>
+          </div>
+
+          <div className="relative mt-32 bg-[#FFFFFF99] advantage-table max-w-[1200px] mx-auto">
+            {/* Main Table Container */}
+            <div className="grid grid-cols-[1.2fr_2fr_1.5fr] border border-[#0707071A] rounded-[24px] overflow-hidden  shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+              {/* Other Agencies Badge (Top Right) */}
+              <div className="absolute -top-24 right-[2.8%] -translate-x-1/2 z-50">
+                <div className="bg-[#FFFFFF99] border border-[#0707071A] rounded-[40px] px-[22px] py-[20px] text-[18px] text-[#07070799] font-resonate min-w-[200px] shadow-sm">
+                  Other Agencies
+                </div>
+              </div>
+
+              {advantageData.map((row, i) => (
+                <div
+                  key={i}
+                  className=" col-span-3 grid grid-cols-[1.2fr_2fr_1.5fr] border-b border-[#0707071A] last:border-b-0"
+                >
+                  {/* Feature Label */}
+                  <div className="flex items-center text-left py-4 px-12  border-[#0707071A]">
+                    <span className="font-stk-bureau font-normal md:text-[16px] lg:text-[22px] leading-[22px] text-[#070707]">
+                      {row.feature}
+                    </span>
+                  </div>
+
+                  {/* Beeztech Column (Empty space for the overlapping card) */}
+                  <div className="py-10 px-12 ">
+                    {/* Content is rendered in the absolute card below, but we need consistency for others */}
+                  </div>
+
+                  {/* Others Column */}
+                  <div className="flex  text-left py-4 px-12 bg-white">
+                    <div className="flex  items-center gap-4">
+                      <span className="text-[18px] text-[#07070799] font-normal mt-[-2px]">
+                        ✓
+                      </span>
+                      <p className="font-resonate font-normal  text-[16px] leading-[22px] text-[#07070799]">
+                        {row.others}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* The Raised Beeztech Card (Overlapping) */}
+            <div className="absolute max-w-[520px] text-left top-[-50px] bottom-[-0px] left-[25%] right-[31.3%] z-20 bg-white border border-[#07070733] rounded-[24px] drop-shadow-[#4962101A] flex flex-col pointer-events-none">
+              
+              <div className="absolute -top-12 left-34 -translate-x-1/2 z-30">
+                <div className="bg-white border border-[#07070733] backdrop-blur-[30.41px] rounded-[200px] px-[22px] py-[17px] ">
+                  <img
+                    src="/Logo_Black.png"
+                    className="w-[140px] h-[34px]"
+                    alt="logo"
+                  />
+                </div>
+              </div>
+
+           
+              <div className="flex-1 flex flex-col pt-[51px]">
+                {advantageData.map((row, i) => (
+                  <div
+                    key={i}
+                    className="  flex-1 flex items-center px-12 border-b border-[#0707071A]"
+                  >
+                    <div className="flex  items-center gap-4">
+                      <span className="text-[22px] text-[#070707] font-normal mt-[-2px]">
+                        ✓
+                      </span>
+                      <p className="font-resonate font-normal text-[16px] leading-[22px] text-[#070707]">
+                        {row.beeztech}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Leadership Section */}
       <section className="relative py-32 px-6 lg:px-12 bg-transparent">
         <div className="max-w-[1500px] mx-auto text-center">
