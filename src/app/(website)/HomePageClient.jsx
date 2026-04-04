@@ -130,6 +130,58 @@ export default function HomePageClient() {
 
   return (
     <main className="w-full overflow-x-hidden ">
+
+      {/* Aerodynamic Theory Section */}
+      <section
+
+      >
+        <div className="max-w-full mx-auto text-center z-10 relative">
+          {/* Quote */}
+          <div className="mb-8 max-w-[900px] mx-auto">
+            <h2 className="text-[32px] md:text-[42px] leading-[48px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
+              According to <span className="font-medium font-resonate">aerodynamic theory</span>,
+              a bee should <span className="font-medium font-resonate">not</span> be able to{" "}
+              <span className="font-medium font-resonate">fly</span>, but the bee{" "}
+              <span className="font-medium font-resonate">doesn’t</span> know that, so it{" "}
+              <span className="font-medium font-resonate">flies anyway</span>.
+            </h2>
+            <p className="mt-4 mb-10 text-[14px] md:text-[16px] text-[#070707] leading-[100%] font-resonate flex items-center justify-center gap-2">
+             
+              - Inspired by the bee
+              
+            </p>
+          </div>
+
+          {/* Description */}
+          <div className="mb-24 max-w-[500px] mx-auto">
+            <p className="text-[16px] md:text-[18px] lg:text-[20px] text-[#070707] leading-[130%] font-resonate ">
+              Some say it’s impossible according to theory. We build the
+              technology that makes it work anyway.
+            </p>
+          </div>
+
+          {/* Visual Container */}
+          <div className="relative w-full overflow-hidden max-w-[1500px] mx-auto mt-24 h-[560px]">
+            {/* The Flight Path (Stock Line) */}
+            <div className="absolute -top-2 inset-0 left-1 z-0">
+              <img src="/aerodynamicBrushg.svg" alt="" />
+            </div>
+
+            {/* Aerodynamic GIF */}
+            <div className="absolute top-[47%]  -left-36 -translate-y-1/2 z-10 w-[450px] md:w-[839px]">
+              <Image
+                src="/aerodynamic.gif"
+                alt="Aerodynamic Bee"
+                width={839}
+                height={569}
+                className="object-contain "
+                unoptimized
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Advantage Section */}
       <section>
         <div className="max-w-[1400px] mx-auto text-center">
