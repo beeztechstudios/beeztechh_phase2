@@ -3,7 +3,8 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
+import ScrollTextAnimation from "@/components/ScrollTextAnimation";
+import Link from "next/link";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -66,10 +67,46 @@ const advantageData = [
 ];
 
 export default function HomePageClient() {
+  const avatarsRef = useRef([]);
   const servicesRef = useRef(null);
   const leadershipRef = useRef(null);
   const advantageRef = useRef(null);
   const teamMembersRef = useRef([]);
+
+  const handleMouseEnter = () => {
+    const tl = gsap.timeline();
+    tl.to(avatarsRef.current, {
+      y: -5,
+      scale: 1.05,
+      duration: 0.25,
+      ease: "power2.out",
+    });
+    tl.to(
+      avatarsRef.current,
+      {
+        x: (i) => i * 42,
+        y: (i) => -35 - Math.sin(i * 0.8) * 20,
+        rotate: (i) => i * 8,
+        scale: 1.5,
+        duration: 0.35,
+        ease: "power3.out",
+        stagger: 0.05,
+      },
+      "-=0.1",
+    );
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(avatarsRef.current, {
+      x: 0,
+      y: 0,
+      rotate: 0,
+      scale: 1,
+      duration: 0.4,
+      ease: "power3.out",
+      stagger: 0.05,
+    });
+  };
 
   useEffect(() => {
     // Leadership Section Animations
@@ -123,32 +160,136 @@ export default function HomePageClient() {
           start: "top 80%",
         },
       });
+
+      // -- Proof & CTA Animations --
+      gsap.from(".proof-item", {
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".proof-section",
+          start: "top 85%",
+        },
+      });
     }, advantageRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main className="w-full overflow-x-hidden ">
+    <main className="w-full">
+     
+      {/* Trusted By & CTA Section */}
+      <section
+        className="proof-section relative py-24 px-6 lg:px-12 bg-white"
+        style={{
+          backgroundImage: `radial-gradient(#e5e7eb 1.5px, transparent 1.5px)`,
+          backgroundSize: "40px 40px",
+        }}
+      >
+        <div className="max-w-[1400px] mx-auto flex flex-col items-center">
+          {/* Trusted By Heading */}
+          <h3 className="proof-item text-[20px] md:text-[24px] text-[#070707CC]   font-stk-bureau mb-6">
+            Trusted by{" "}
+            <span className="font-medium font-resonate leading-[27px] text-[#070707]">
+              40+ startups and global brands
+            </span>
+          </h3>
+
+          {/* Logo Bar */}
+          <div className="proof-item w-full max-w-[1200px] border border-[#0707071A] rounded-full px-12 py-6 flex flex-wrap items-center justify-evenly gap-x-16 gap-y-8 bg-[#FFFFFF99] mb-9">
+            {/* Logos - Using text labels with distinct styles for each */}
+            <img
+              src="/trustedByIcons/logo1.png"
+              alt="ff"
+              className="h-[60px] "
+            />
+            <img src="/trustedByIcons/logo2.png" alt="" className="h-[60px]" />
+            <img src="/trustedByIcons/logo3.png" alt="" className="h-[60px]" />
+            <img src="/trustedByIcons/logo4.png" alt="" className="h-[60px]" />
+            <img src="/trustedByIcons/logo5.png" alt="" className="h-[60px]" />
+          </div>
+
+          {/* Ready to Build CTA */}
+          <div
+            className="flex items-center gap-4  justify-between  w-full max-w-[668px] bg-white border border-[#0707071A] rounded-full px-6 py-4"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Avatar Stack */}
+            <div className="relative flex items-center">
+              {["/kishanCta.svg", "/abhishekCta.svg", "/aadarshCta.svg"].map(
+                (src, i) => (
+                  <div
+                    key={i}
+                    ref={(el) => {
+                      avatarsRef.current[i] = el;
+                    }}
+                    className={`relative w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-md
+                    ${i !== 0 ? "-ml-5" : ""}
+                  `}
+                    style={{ zIndex: 10 - i }}
+                  >
+                    <Image
+                      src={src}
+                      alt="avatar"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+
+            {/* Text */}
+            <p className="text-[20px] font-normal  border-l border-[#0707071A] pl-[16px] text-[#070707] font-stk-bureau leading-[27px]">
+              Ready to build 🐝
+              <br />
+              <span className="font-semibold font-stk-bureau  leading-[27px]">
+                something amazing
+              </span>{" "}
+              <span className="font-normal font-stk-bureau  leading-[27px]">
+                with Beeztech?
+              </span>
+            </p>
+
+            {/* Button */}
+            <div className="flex items-center gap-[2px] bg-[#070707] px-[15px] py-[11px] rounded-[97px]">
+              <Link href="/book-call" className="text-white text-[14px]">
+                Book a 15-min call
+              </Link>
+              <img
+                src="/icons/upRightArrow.svg"
+                className="w-[16px] h-[14px]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ScrollTextAnimation />
 
       {/* Aerodynamic Theory Section */}
-      <section
-
-      >
+      <section>
         <div className="max-w-full mx-auto text-center z-10 relative">
           {/* Quote */}
           <div className="mb-8 max-w-[900px] mx-auto">
             <h2 className="text-[32px] md:text-[42px] leading-[48px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
-              According to <span className="font-medium font-resonate">aerodynamic theory</span>,
-              a bee should <span className="font-medium font-resonate">not</span> be able to{" "}
-              <span className="font-medium font-resonate">fly</span>, but the bee{" "}
-              <span className="font-medium font-resonate">doesn’t</span> know that, so it{" "}
+              According to{" "}
+              <span className="font-medium font-resonate">
+                aerodynamic theory
+              </span>
+              , a bee should{" "}
+              <span className="font-medium font-resonate">not</span> be able to{" "}
+              <span className="font-medium font-resonate">fly</span>, but the
+              bee <span className="font-medium font-resonate">doesn’t</span>{" "}
+              know that, so it{" "}
               <span className="font-medium font-resonate">flies anyway</span>.
             </h2>
             <p className="mt-4 mb-10 text-[14px] md:text-[16px] text-[#070707] leading-[100%] font-resonate flex items-center justify-center gap-2">
-             
               - Inspired by the bee
-              
             </p>
           </div>
 
@@ -181,6 +322,7 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
+
 
       {/* Advantage Section */}
       <section>
@@ -239,8 +381,7 @@ export default function HomePageClient() {
             </div>
 
             {/* The Raised Beeztech Card (Overlapping) */}
-            <div className="absolute max-w-[520px] text-left top-[-50px] bottom-[-0px] left-[25%] right-[31.3%] z-20 bg-white border border-[#07070733] rounded-[24px] drop-shadow-[#4962101A] flex flex-col pointer-events-none">
-              
+            <div className="absolute max-w-[520px] text-left top-[-50px] bottom-[-0px] left-[25%] right-[31.3%] z-20 bg-white border border-[#07070733] rounded-[24px] drop-shadow-2xl flex flex-col pointer-events-none">
               <div className="absolute -top-12 left-34 -translate-x-1/2 z-30">
                 <div className="bg-white border border-[#07070733] backdrop-blur-[30.41px] rounded-[200px] px-[22px] py-[17px] ">
                   <img
@@ -251,7 +392,6 @@ export default function HomePageClient() {
                 </div>
               </div>
 
-           
               <div className="flex-1 flex flex-col pt-[51px]">
                 {advantageData.map((row, i) => (
                   <div

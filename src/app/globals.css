@@ -86,3 +86,108 @@ body {
 .portable-content a:hover {
   color: #1d4ed8 !important;
 }
+
+/* ─────────────────────────────────────────────
+   ScrollTextAnimation Component
+   ───────────────────────────────────────────── */
+.sta-section {
+  background-color: transparent;
+  color: black;
+  width: 100%;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.sta-content {
+  padding: 20vh 1.5rem 25vh;
+}
+
+.sta-group {
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100px;
+}
+
+.sta-el {
+  white-space: nowrap;
+  filter: blur(0px);
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.sta-el--xl {
+  font-size: clamp(2rem, 20vw, 15rem);
+  opacity: 1;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sta-el--heading {
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-weight: 700;
+  opacity: 1;
+  white-space: normal;
+}
+
+.sta-pos-1 {
+  /* default: left-aligned */
+}
+
+.sta-pos-2 {
+  margin-left: 25vw;
+}
+
+.sta-pos-3 {
+  margin-left: 70vw;
+}
+
+.sta-pos-4 {
+  margin-left: auto;
+}
+
+.sta-pos-5 {
+  margin-top: 200px;
+  opacity: 1;
+}
+
+.sta-pos-6 {
+  margin-left: auto;
+  margin-top: 200px;
+  opacity: 1;
+}
+
+.sta-pos-7 {
+  margin-top: 200px;
+  opacity: 1;
+  filter: blur(1.2px);
+}
+
+.sta-pos-8 {
+  margin-left: 25vw;
+  margin-top: 50px;
+  opacity: 1;
+  filter: blur(2px);
+}
+
+.sta-pos-9 {
+  margin-left: 25vw;
+  margin-top: 250px;
+}
+
+.sta-pos-10 {
+  margin-left: 70vw;
+  margin-top: 40vh;
+}
+
+@keyframes sta-blink-cursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.sta-typing-indicator {
+  display: inline-block;
+  animation: sta-blink-cursor 0.7s linear infinite;
+}
