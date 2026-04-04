@@ -55,13 +55,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className=" border-t border-gray-100 font-resonate">
+    <footer className="font-resonate">
       {/* ── Top Section ── */}
-      <div className="max-w-[1300px]  mx-auto px-6 lg:px-10 pt-12 pb-10">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-10 pt-12 ">
         <div className="flex flex-col  md:flex-row items-start md:items-center justify-between gap-8">
           {/* CTA Pill */}
           <div
-            className="flex items-center gap-4 bg-white border border-[#0707071A] rounded-full px-1 py-4 w-fit"
+            className="flex items-center gap-4 bg-white border border-[#0707071A] rounded-full px-6 py-4 w-fit"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -91,11 +91,11 @@ export default function Footer() {
             </div>
 
             {/* Text */}
-            <p className="text-sm border-l border-[#0707071A] pl-[16px] text-[#070707] font-resonate text-[20px] leading-[27px]">
+            <p className="text-[20px] font-normal  border-l border-[#0707071A] pl-[16px] text-[#070707] font-stk-bureau leading-[27px]">
               Ready to build 🐝
               <br />
-              <span className="font-medium">something amazing</span> with
-              Beeztech?
+              <span className="font-semibold font-stk-bureau  leading-[27px]">something amazing</span> <span className="font-normal font-stk-bureau  leading-[27px]">with
+              Beeztech?</span> 
             </p>
 
             {/* Button */}
@@ -114,13 +114,13 @@ export default function Footer() {
           <img
             src="/beeztechFooter.svg"
             alt="Beeztech"
-            className="w-[529px] h-[108px]"
+            className="w-[650px] h-[108px]"
           />
         </div>
       </div>
 
       {/* ── Middle Section ── */}
-      <div className="max-w-[1300px]  mx-auto px-6 lg:px-10 py-12">
+      <div className="max-w-[1800px]  mx-auto px-6 lg:px-10 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[140px_120px_1.5fr_1fr] gap-10 lg:gap-6">
           {/* Company */}
           <div>
@@ -169,7 +169,7 @@ export default function Footer() {
           </div>
 
           {/* Services + Email CTA */}
-          <div className="col-span-2 w-full  md:col-span-2  lg:col-span-1">
+          <div className="col-span-2  w-full  md:col-span-2  lg:col-span-1">
             {/* Service links */}
             <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6">
               {[
@@ -220,7 +220,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="col-span-2 md:col-span-4 w-fit mx-auto lg:col-span-1 ">
+          <div className="col-span-2  md:col-span-4 w-full mx-auto lg:col-span-1 ">
             <p className="text-[#070707] font-resonate font-medium text-[18px] leading-[140%] mb-4 max-w-[400px]">
               Get valuable strategy, culture, <br /> and brand insights straight
               to your inbox.
@@ -249,7 +249,7 @@ export default function Footer() {
                 />
               </button>
             </form>
-            <p className="text-xs text-gray-400 leading-relaxed max-w-[300px]">
+            <p className="text-xs text-[#070707] leading-relaxed max-w-[300px]">
               By signing up to receive emails from Beeztech, you agree to our{" "}
               <Link
                 href="/privacy-policy"
@@ -264,15 +264,16 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom Bar ── */}
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-10 py-5">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-10 py-5">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Copyright */}
+          <div className="flex items-center gap-[141px]">
           <p className="text-[#070707] font-resonate text-[14px] leading-[100%] order-2 sm:order-1">
             © 2025 Beeztech Studio — All rights reserved.
           </p>
 
           {/* Social */}
-          <div className="flex items-center gap-6 order-1 sm:order-2">
+          <div className="flex items-center gap-4 order-1 sm:order-2">
             <a
               href="https://instagram.com/beeztech"
               target="_blank"
@@ -289,6 +290,7 @@ export default function Footer() {
             >
               LinkedIn
             </a>
+          </div>
           </div>
 
           {/* Legal */}
