@@ -66,12 +66,24 @@ const advantageData = [
   },
 ];
 
+const processSteps = [
+  { step: "Step 1", title: "Discover", stage: "Egg Stage", image: "/step1.png" },
+  { step: "Step 2", title: "Plan", stage: "Larva Stage", image: "/step1.png" },
+  { step: "Step 3", title: "Build", stage: "Pupa Stage", image: "/step1.png" },
+  { step: "Step 4", title: "Launch", stage: "Bee Stage", image: "/step1.png" },
+  { step: "Step 5", title: "Grow", stage: "Hive Stage", image: "/step1.png" },
+  // { step: "Step 6", title: "Scale", stage: "Honey Stage", image: "/step1.png" },
+];
+
 export default function HomePageClient() {
   const avatarsRef = useRef([]);
   const servicesRef = useRef(null);
   const leadershipRef = useRef(null);
   const advantageRef = useRef(null);
   const teamMembersRef = useRef([]);
+  const processSectionRef = useRef(null);
+  const processViewportRef = useRef(null);
+  const processSliderRef = useRef(null);
 
   const handleMouseEnter = () => {
     const tl = gsap.timeline();
@@ -111,6 +123,33 @@ export default function HomePageClient() {
   useEffect(() => {
     // Leadership Section Animations
     const ctx = gsap.context(() => {
+      // Process section horizontal slide animation
+      if (
+        processSectionRef.current &&
+        processViewportRef.current &&
+        processSliderRef.current
+      ) {
+        const processSection = processSectionRef.current;
+        const processViewport = processViewportRef.current;
+        const processSlider = processSliderRef.current;
+        const getScrollDistance = () =>
+          Math.max(0, processSlider.scrollWidth - processViewport.clientWidth);
+
+        gsap.to(processSlider, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: processSection,
+            start: "top top",
+            end: () => `+=${getScrollDistance()}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+
       // Header Animation
       gsap.from(".leadership-header", {
         opacity: 0,
@@ -180,7 +219,7 @@ export default function HomePageClient() {
 
   return (
     <main className="w-full">
-     
+
       {/* Trusted By & CTA Section */}
       <section
         className="proof-section relative py-24 px-6 lg:px-12 bg-white"
@@ -318,6 +357,107 @@ export default function HomePageClient() {
                 className="object-contain "
                 unoptimized
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Beeztech Process Section */}
+      <section
+        ref={processSectionRef}
+        className="relative py-24 px-6 lg:px-12 overflow-hidden"
+        style={{
+
+          backgroundSize: "42px 42px",
+
+        }}
+      >
+        <div className="max-w-[1800px] mx-auto">
+          <div className="flex flex-col xl:flex-row xl:items-center gap-4 xl:gap-6 min-h-[520px]">
+            <div className="w-auto xl:w-[auto] xl:flex-shrink-0 xl:pt-0 pr-4">
+              <p className="text-[#070707] font-resonate font-normal text-[14px] md:text-[14px] leading-[100%]">
+                We build solutions step by step.
+              </p>
+              <h2 className="text-[36px] md:text-[36px] font-[500] lg:text-[36px] leading-[1.1] text-[#070707] font-resonate tracking-[-1.2%]">
+                Beeztech <span className="font-stk-bureau font-[400]">process</span>
+              </h2>
+            </div>
+
+            <div
+              ref={processViewportRef}
+              className="relative flex-1 min-h-[460px] md:min-h-[540px] overflow-hidden flex items-center"
+            >
+              <div
+                ref={processSliderRef}
+                className="process-slider flex ml-20 items-start gap-7 md:gap-7 w-max pr-12 mx-auto"
+              >
+                {processSteps.map((item, index) => (
+                  <div key={item.step} className="relative flex-shrink-0 w-[260px]">
+                    <div className="relative mx-auto h-[282px] w-[243px] rounded-[5px]">
+                      <svg
+                        viewBox="0 0 244 282"
+                        className="absolute inset-0 h-full w-full"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M241.009 68.8218C242.551 69.7163 243.5 71.364 243.5 73.1466V208.289C243.5 210.071 242.551 211.719 241.009 212.614L124.413 280.261C122.861 281.162 120.944 281.161 119.392 280.259L2.98778 212.614C1.44766 211.719 0.5 210.073 0.5 208.291L0.5 73.1443C0.5 71.363 1.44767 69.7162 2.98779 68.8212L119.392 1.17648C120.944 0.274536 122.861 0.273865 124.413 1.17474L241.009 68.8218Z"
+                          fill="white"
+                          fillOpacity="0.6"
+                          stroke="#070707"
+                          strokeOpacity="0.1"
+                          strokeMiterlimit="10"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <Image
+                          src={item.image}
+                          alt={`${item.title} stage visual`}
+                          width={155}
+                          height={168}
+                          className="w-[155px] h-[168px] object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    {index < processSteps.length && (
+                      <svg
+                        className="absolute left-[-5%] top-35 z-20 -translate-y-1/2 -translate-x-1/2"
+                        width="88"
+                        height="38"
+                        viewBox="0 0 88 38"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.2 1.6C11.76 0.64 12.8 0 13.92 0L74.08 0C75.2 0 76.24 0.64 76.8 1.6L87.2 17.44C87.92 18.48 87.92 19.92 87.2 20.96L76.8 36.8C76.24 37.76 75.2 38.4 74.08 38.4L13.92 38.4C12.8 38.4 11.76 37.76 11.2 36.8L0.8 20.96C0.08 19.92 0.08 18.48 0.8 17.44Z"
+                          fill="white"
+                          fillOpacity="1"
+                          stroke="#d0d0d0"
+                          strokeWidth="1"
+                        />
+                        <text
+                          x="44"
+                          y="25"
+                          textAnchor="middle"
+                          fontFamily="var(--font-resonate, sans-serif)"
+                          fontSize="16"
+                          fontWeight="500"
+                          fill="#070707"
+                        >
+                          {item.step}
+                        </text>
+                      </svg>
+                    )}
+
+                    <div className="text-center text-[18px] mt-8">
+                      <h3 className="text-[18px] leading-none text-[#070707] font-stk-bureau">
+                        <span className=" font-resonate  font-[600]">{item.title}</span>{" "}
+                        <span className="font-normal">({item.stage})</span>
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
