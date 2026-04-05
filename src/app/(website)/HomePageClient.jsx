@@ -83,11 +83,9 @@ const outcomesData = [
 
 export default function HomePageClient() {
   const pageRef = useRef(null);
+  const strategicStickyRef = useRef(null);
   const outcomesRef = useRef([]);
   const avatarsRef = useRef([]);
-  const servicesRef = useRef(null);
-  const leadershipRef = useRef(null);
-  const advantageRef = useRef(null);
   const teamMembersRef = useRef([]);
 
   const handleMouseEnter = () => {
@@ -178,6 +176,19 @@ export default function HomePageClient() {
         },
       });
 
+      // -- Strategic Studio Pinning -- 
+      if (strategicStickyRef.current) {
+        ScrollTrigger.create({
+          trigger: ".strategic-studio",
+          start: "top top",
+          end: "bottom bottom",
+          pin: strategicStickyRef.current,
+          pinSpacing: false,
+          scrub: true,
+          invalidateOnRefresh: true,
+        });
+      }
+
       // -- Horizontal Pin Section --
       const horizontalContainer = document.querySelector(
         ".horizontal-text-container",
@@ -217,14 +228,15 @@ export default function HomePageClient() {
   return (
     <main ref={pageRef} className="w-full">
       {/* Strategic Studio Section */}
-      <section className="strategic-studio  relative  pt-[150px]  ">
-        <div className="max-w-[1400px] overflow-hidden mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+      {/* Strategic Studio Section */}
+      <section className="strategic-studio relative pt-[150px] ">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Left Column (Scrollable Text) */}
-          <div className="flex flex-col  pt-24 pb-48 ">
+          <div className="flex flex-col pt-24 pb-48">
             {/* Top Block */}
-            <div className="flex  justify-between w-[1200px]">
+            <div className="flex justify-between w-[1200px]">
               <div className="max-w-[500px]">
-                <h2 className="text-[48px] font-stk-bureau leading-[57px]  text-[#070707] tracking-[-2%] mb-8">
+                <h2 className="text-[48px] font-stk-bureau leading-[57px] text-[#070707] tracking-[-2%] mb-8">
                   We're a strategic <br />
                   Branding{" "}
                   <span className="font-medium font-resonate tracking-[-0.04em]">
@@ -262,10 +274,10 @@ export default function HomePageClient() {
               <p className="text-[#070707] font-resonate font-normal text-[14px] lg:text-[16px] mb-8 leading-[100%]">
                 Inside Beeztech Studio
               </p>
-              <h3 className="text-[42px] font-stk-bureau font-normal leading-[55px] text-[#070707] ">
+              <h3 className="text-[42px] font-stk-bureau font-normal leading-[55px] text-[#070707]">
                 We are consultants <br /> and craftspeople,
                 <br />
-                <span className="font-medium font-resonate ">brands</span> with
+                <span className="font-medium font-resonate">brands</span> with
                 tailored web <br />
                 solutions, from selective
                 <br />
@@ -284,7 +296,7 @@ export default function HomePageClient() {
                 <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
                   30+
                 </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau ">
+                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
                   Industry Partners
                 </span>
               </div>
@@ -292,7 +304,7 @@ export default function HomePageClient() {
                 <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
                   97%
                 </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau ">
+                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
                   Client Retention Rate
                 </span>
               </div>
@@ -300,18 +312,21 @@ export default function HomePageClient() {
           </div>
 
           {/* Right Column (Sticky Visual) */}
-          <div className="sticky top-0 h-screen hidden lg:flex items-center justify-center ">
+          <div
+            ref={strategicStickyRef}
+            className="relative h-screen hidden  overflow-hidden  lg:flex items-center justify-center pt-20"
+          >
             {/* Background Hexagon Pattern */}
-            <div className="absolute inset-0  right-[-290px] top-[380px]  pointer-events-none select-none">
+            <div className="absolute inset-0 right-[-290px] top-[20%] pointer-events-none select-none">
               <img src="/grid.svg" alt="" />
             </div>
 
             {/* Main Visual Image (Bee/Flower) */}
-            <div className="absolute right-[-45px] top-60 w-full items-center justify-center ">
+            <div className="relative w-full flex items-center justify-center">
               <img
                 src="/heroGif.gif"
-                alt=""
-                className="-scale-x-100   rotate-[-50deg]"
+                alt="Bee Visual"
+                className="-scale-x-100 rotate-[-50deg] w-full h-auto max-h-[80vh]  object-contain mr-[-5vw]"
               />
             </div>
           </div>
