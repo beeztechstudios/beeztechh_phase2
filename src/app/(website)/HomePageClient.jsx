@@ -67,6 +67,7 @@ const advantageData = [
 ];
 
 export default function HomePageClient() {
+  const pageRef = useRef(null);
   const avatarsRef = useRef([]);
   const servicesRef = useRef(null);
   const leadershipRef = useRef(null);
@@ -161,25 +162,42 @@ export default function HomePageClient() {
         },
       });
 
-      // -- Proof & CTA Animations --
-      gsap.from(".proof-item", {
-        opacity: 0,
-        y: 40,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".proof-section",
-          start: "top 85%",
-        },
-      });
-    }, advantageRef);
+      // -- Horizontal Pin Section --
+      const horizontalContainer = document.querySelector(".horizontal-text-container");
+      if (horizontalContainer) {
+        // Horizontal Slide
+        gsap.to(horizontalContainer, {
+          x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".horizontal-section",
+            start: "top top",
+            end: () => `+=${horizontalContainer.scrollWidth}`, // Longer scroll
+            scrub: 1.2,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Rotation
+        gsap.to(".rotating-badge-container", {
+          rotate: 1080, // Multiple rotations
+          scrollTrigger: {
+            trigger: ".horizontal-section",
+            start: "top top",
+            end: () => `+=${horizontalContainer.scrollWidth}`,
+            scrub: 1.2,
+          }
+        });
+      }
+    }, pageRef); // Use pageRef for full-page scope
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main className="w-full">
+    <main ref={pageRef} className="w-full">
      
       {/* Trusted By & CTA Section */}
       <section
@@ -412,6 +430,60 @@ export default function HomePageClient() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Horizontal Scroll Section (Pinned) */}
+      <section className="horizontal-section relative overflow-hidden z-40 border-t border-b border-[#0707070D]"
+        
+      >
+        <div className="h-screen flex items-center px-[10vw]">
+            {/* The Sliding Text Container */}
+            <div className="horizontal-text-container whitespace-nowrap z-10 flex items-center will-change-transform">
+                <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
+              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">Beeztech.Studio</span>
+                    
+                    {/* The Rotating Circle Badge */}
+                    <div className="rotating-badge-container absolute z-90 w-[180px] h-[180px] md:w-[260px] md:h-[260px] shrink-0">
+                        <svg viewBox="0 0 200 200" className="w-full h-full animate-slow-spin">
+                            <defs>
+                                <path id="circlePath" d="M 100, 100 m -80, 0 a 80, 80 0 1, 1 160, 0 a 80, 80 0 1, 1 -160, 0" />
+                            </defs>
+                            <circle cx="100" cy="100" r="85" fill="none" stroke="#07070710" strokeWidth="0.5" />
+                            <text fill="#070707CC" fontSize="13" fontWeight="500" letterSpacing="1" className="font-resonate uppercase">
+                                <textPath href="#circlePath">
+                                   • WE BUILD BRANDS & DIGITAL PRODUCTS FOR LASTING SUCCESS • 
+                                </textPath>
+                            </text>
+                        </svg>
+                        
+                        {/* Center Bee Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
+                            <img src="/Logo_Black.png" alt="Bee" className="w-full h-auto object-contain opacity-90" />
+                        </div>
+                    </div>
+
+              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]"> flies anyway</span>
+                </h2>
+                
+                {/* Extra text to extend the scroll length */}
+                <div className="w-[5vw]"></div>
+
+            <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
+              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">Beeztech.Studio</span>
+              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]"> flies anyway</span>
+            </h2>
+            </div>
+        </div>
+
+        <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes slow-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .animate-slow-spin {
+                animation: slow-spin 15s linear infinite;
+            }
+        ` }} />
       </section>
 
       {/* Leadership Section */}
