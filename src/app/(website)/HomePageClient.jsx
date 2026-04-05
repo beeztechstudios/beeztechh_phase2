@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import ScrollTextAnimation from "@/components/ScrollTextAnimation";
 import Link from "next/link";
+import RotatingBadge from "../../components/RotatingBadge";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -163,7 +164,9 @@ export default function HomePageClient() {
       });
 
       // -- Horizontal Pin Section --
-      const horizontalContainer = document.querySelector(".horizontal-text-container");
+      const horizontalContainer = document.querySelector(
+        ".horizontal-text-container",
+      );
       if (horizontalContainer) {
         // Horizontal Slide
         gsap.to(horizontalContainer, {
@@ -188,7 +191,7 @@ export default function HomePageClient() {
             start: "top top",
             end: () => `+=${horizontalContainer.scrollWidth}`,
             scrub: 1.2,
-          }
+          },
         });
       }
     }, pageRef); // Use pageRef for full-page scope
@@ -198,7 +201,6 @@ export default function HomePageClient() {
 
   return (
     <main ref={pageRef} className="w-full">
-     
       {/* Trusted By & CTA Section */}
       <section
         className="proof-section relative py-24 px-6 lg:px-12 bg-white"
@@ -341,7 +343,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-
       {/* Advantage Section */}
       <section>
         <div className="max-w-[1400px] mx-auto text-center">
@@ -433,49 +434,44 @@ export default function HomePageClient() {
       </section>
 
       {/* Horizontal Scroll Section (Pinned) */}
-      <section className="horizontal-section relative overflow-hidden z-40 border-t border-b border-[#0707070D]"
-        
-      >
+      <section className="horizontal-section relative overflow-hidden z-40 ">
         <div className="h-screen flex items-center px-[10vw]">
-            {/* The Sliding Text Container */}
-            <div className="horizontal-text-container whitespace-nowrap z-10 flex items-center will-change-transform">
-                <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
-              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">Beeztech.Studio</span>
-                    
-                    {/* The Rotating Circle Badge */}
-                    <div className="rotating-badge-container absolute z-90 w-[180px] h-[180px] md:w-[260px] md:h-[260px] shrink-0">
-                        <svg viewBox="0 0 200 200" className="w-full h-full animate-slow-spin">
-                            <defs>
-                                <path id="circlePath" d="M 100, 100 m -80, 0 a 80, 80 0 1, 1 160, 0 a 80, 80 0 1, 1 -160, 0" />
-                            </defs>
-                            <circle cx="100" cy="100" r="85" fill="none" stroke="#07070710" strokeWidth="0.5" />
-                            <text fill="#070707CC" fontSize="13" fontWeight="500" letterSpacing="1" className="font-resonate uppercase">
-                                <textPath href="#circlePath">
-                                   • WE BUILD BRANDS & DIGITAL PRODUCTS FOR LASTING SUCCESS • 
-                                </textPath>
-                            </text>
-                        </svg>
-                        
-                        {/* Center Bee Icon */}
-                        <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
-                            <img src="/Logo_Black.png" alt="Bee" className="w-full h-auto object-contain opacity-90" />
-                        </div>
-                    </div>
+          {/* The Sliding Text Container */}
+          <div className="horizontal-text-container whitespace-nowrap z-10 flex items-center will-change-transform">
+            <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
+              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
+                Beeztech.Studio
+              </span>
+              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
+                {" "}
+                flies anyway
+              </span>
+            </h2>
 
-              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]"> flies anyway</span>
-                </h2>
-                
-                {/* Extra text to extend the scroll length */}
-                <div className="w-[5vw]"></div>
+            {/* Extra text to extend the scroll length */}
+            <div className="w-[5vw]"></div>
 
             <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
-              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">Beeztech.Studio</span>
-              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]"> flies anyway</span>
+              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
+                Beeztech.Studio
+              </span>
+              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
+                {" "}
+                flies anyway
+              </span>
             </h2>
-            </div>
+          </div>
+          {/* The Rotating Circle Badge */}
+          <div className="absolute left-[1200px] z-[100] ">
+            {/* ROTATING TEXT RING */}
+            <RotatingBadge />
+            
+          </div>
         </div>
 
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @keyframes slow-spin {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
@@ -483,7 +479,9 @@ export default function HomePageClient() {
             .animate-slow-spin {
                 animation: slow-spin 15s linear infinite;
             }
-        ` }} />
+        `,
+          }}
+        />
       </section>
 
       {/* Leadership Section */}
