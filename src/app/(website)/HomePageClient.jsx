@@ -67,8 +67,23 @@ const advantageData = [
   },
 ];
 
+const outcomesData = [
+  { icon: "/brandingOutcomes/trusted.svg", title: "Trusted 50+ brand" },
+  { icon: "/brandingOutcomes/brandRecog.svg", title: "Brand recognition" },
+  {
+    icon: "/brandingOutcomes/premiumPerception.svg",
+    title: "Premium perception",
+  },
+  { icon: "/brandingOutcomes/highConversion.svg", title: "Higher conversions" },
+  {
+    icon: "/brandingOutcomes/lowerMarketingCost.svg",
+    title: "Lower marketing cost",
+  },
+];
+
 export default function HomePageClient() {
   const pageRef = useRef(null);
+  const outcomesRef = useRef([]);
   const avatarsRef = useRef([]);
   const servicesRef = useRef(null);
   const leadershipRef = useRef(null);
@@ -296,7 +311,7 @@ export default function HomePageClient() {
         <div className="max-w-full mx-auto text-center z-10 relative">
           {/* Quote */}
           <div className="mb-8 max-w-[900px] mx-auto">
-            <h2 className="text-[32px] md:text-[42px] leading-[48px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
+            <h2 className="text-[32px] md:text-[42px] leading-[62px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
               According to{" "}
               <span className="font-medium font-resonate">
                 aerodynamic theory
@@ -433,39 +448,123 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* Horizontal Scroll Section (Pinned) */}
-      <section className="horizontal-section relative overflow-hidden z-40 ">
-        <div className="h-screen flex items-center px-[10vw]">
-          {/* The Sliding Text Container */}
-          <div className="horizontal-text-container whitespace-nowrap z-10 flex items-center will-change-transform">
-            <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
-              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
-                Beeztech.Studio
+      {/* Branding Outcomes Section */}
+      <section>
+        <div className=" max-w-[1400px] py-[180px] mx-auto  z-10 relative">
+          {/* Visual Container */}
+          <div className="absolute w-full top-[70px] overflow-hidden max-w-[1400px] mx-auto">
+            <img src="/brandingOutcomesStroke.svg" alt="" />
+          </div>
+          {/* Header */}
+          <div className=" mx-auto flex flex-col mb-[70px]">
+            <p className="text-[#070707] font-resonate font-normal mb-[16px] text-[14px] lg:text-[16px] leading-[100%]">
+              Brand impact
+            </p>
+            <h2 className="text-[36px] font-resonate font-medium leading-[48px] text-[#070707] tracking-[-1.2%]">
+              Branding{" "}
+              <span className="font-stk-bureau font-normal  leading-[48px] tracking-[-1.2%] text-[#07070799] ">
+                outcomes
               </span>
-              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
-                {" "}
-                flies anyway
-              </span>
-            </h2>
-
-            {/* Extra text to extend the scroll length */}
-            <div className="w-[5vw]"></div>
-
-            <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
-              <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
-                Beeztech.Studio
-              </span>
-              <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
-                {" "}
-                flies anyway
+              <br />
+              <span className="font-stk-bureau mx-50 font-normal text-[#070707] ">
+                (Minimal + Impactful)
               </span>
             </h2>
           </div>
-          {/* The Rotating Circle Badge */}
-          <div className="absolute left-[1200px] z-[100] ">
-            {/* ROTATING TEXT RING */}
-            <RotatingBadge />
-            
+
+          {/* Grid of Hexagons */}
+          <div className="flex  bg-transparent  gap-[40px] items-start ">
+            {outcomesData.map((item, i) => (
+              <div
+                key={i}
+                ref={(el) => (outcomesRef.current[i] = el)}
+                className="flex flex-col items-center group cursor-default transition-all duration-300"
+              >
+                <div className="relative w-[243px] h-[282px] flex flex-col gap-[30px] items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                  {/* Hexagon SVG */}
+
+                  {/* 🔥 GLASS HEXAGON */}
+                  <div
+                    className="absolute inset-0 backdrop-blur-[10.41px] bg-[#FFFFFF]/60 "
+                    style={{
+                      clipPath:
+                        "polygon(50% 0%, 100% 22.5%, 100% 77.5%, 50% 100%, 0% 77.5%, 0% 22.5%)",
+                    }}
+                  />
+
+                  {/* OPTIONAL: SVG border (if you want sharper edges) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    viewBox="0 0 180 200"
+                  >
+                    <polygon
+                      points="90,0 178,45 178,155 90,200 2,155 2,45"
+                      fill="transparent"
+                      stroke="#0707071A"
+                      strokeWidth="1"
+                    />
+                  </svg>
+
+                  <div className="absolute top-[55px]  z-10 w-[120px] h-[107px] ">
+                    <img
+                      src="/brandingOutcomes/iconbg.svg"
+                      alt="iconbg"
+                      className="w-[120px] h-[107px]"
+                    />
+                  </div>
+                  {/* Icon */}
+                  <div className="relative  z-10 w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      className="w-6 h-6 lg:w-9 lg:h-9 "
+                    />
+                  </div>
+
+                  {/* Title */}
+                  <p className="font-resonate z-100  text-[18px]   text-[#070707] text-center max-w-[100px] leading-[20px] ">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Horizontal Scroll Section (Pinned) */}
+      <section className="horizontal-section relative overflow-hidden z-40 ">
+        <div className="w-full h-screen flex items-center">
+          <div className="pl-[calc((100vw-1400px)/2)] pr-[10vw]">
+            {/* The Sliding Text Container */}
+            <div className="horizontal-text-container whitespace-nowrap z-10 flex items-center will-change-transform">
+              <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
+                <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
+                  Beeztech.Studio
+                </span>
+                <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
+                  {" "}
+                  flies anyway
+                </span>
+              </h2>
+
+              {/* Extra text to extend the scroll length */}
+              <div className="w-[5vw]"></div>
+
+              <h2 className="text-[120px] z-10 md:text-[128px] lg:text-[200px] font-stk-bureau leading-none flex items-center gap-12 lg:gap-20">
+                <span className="text-[#070707] font-resonate font-medium leading-[100%] tracking-[-2%]">
+                  Beeztech.Studio
+                </span>
+                <span className="font-normal font-stk-bureau leading-[100%] tracking-[-2%] text-[#070707]">
+                  {" "}
+                  flies anyway
+                </span>
+              </h2>
+            </div>
+            {/* The Rotating Circle Badge */}
+            <div className="absolute top-1/2 left-1/2 z-[100] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <RotatingBadge />
+            </div>
           </div>
         </div>
 

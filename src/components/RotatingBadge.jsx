@@ -23,7 +23,7 @@ export default function RotatingBadge() {
       <div className="absolute inset-0 rounded-full" />
 
       <div
-        className="absolute inset-0 rounded-full bg-[#FFFFFFE5] backdrop-blur-[30.41px]"
+        className="absolute inset-0 rounded-full bg-[#FFFFFFE5] backdrop-blur-[30.41px] border border-[#0707071A]"
         style={{
           WebkitMask:
             "radial-gradient(circle at center, transparent 75px, black 76px)",
