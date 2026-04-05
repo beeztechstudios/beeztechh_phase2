@@ -277,6 +277,26 @@ export default function HomePageClient() {
                 <span className="font-medium font-resonate">quality</span>.
               </h3>
             </div>
+
+            {/* Stats Block */}
+            <div className="flex gap-24 mt-26">
+              <div className="flex flex-col gap-4">
+                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
+                  30+
+                </span>
+                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau ">
+                  Industry Partners
+                </span>
+              </div>
+              <div className="flex flex-col gap-4 ml-8">
+                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
+                  97%
+                </span>
+                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau ">
+                  Client Retention Rate
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Right Column (Sticky Visual) */}
@@ -285,15 +305,14 @@ export default function HomePageClient() {
             <div className="absolute inset-0  right-[-290px] top-[380px]  pointer-events-none select-none">
               <img src="/grid.svg" alt="" />
             </div>
-           
-              {/* Main Visual Image (Bee/Flower) */}
-              <div className="absolute right-[-45px] top-60 w-full items-center justify-center ">
-                <img
-                  src="/heroGif.gif"
-                  alt=""
-                  className="-scale-x-100   rotate-[-50deg]"
-                />
-           
+
+            {/* Main Visual Image (Bee/Flower) */}
+            <div className="absolute right-[-45px] top-60 w-full items-center justify-center ">
+              <img
+                src="/heroGif.gif"
+                alt=""
+                className="-scale-x-100   rotate-[-50deg]"
+              />
             </div>
           </div>
         </div>
