@@ -474,43 +474,43 @@ const WebDevelopmentPage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-10 p-0 sm:p-6 md:p-0">
 
               {initialProjects.map((project, idx) => (
-                
-                <a  href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer">
-                <div key={idx} className="relative bg-black hover:border-none border-orange-500 rounded-xl h-70 md:h-96 pb-2 flex flex-col justify-end  transition-all duration-800 ease-in-out transform hover:scale-105 overflow-hidden  flex-shrink-0 " >
-                  
-                  <img
-                    src={project.image}
-                    alt={`brand-img-col1-${idx}`}
-                    className="w-full h-full object-fill transition-all  "
-                  />
 
-                  <div className="  bg-black/70  p-4 backdrop-blur-sm rounded-xl inline-flex items-center justify-between shadow-2xl transition duration-300 translate-y-2 group-hover:translate-y-0">
-                    <div className="flex flex-col">
-                      <span className="text-xs font-medium uppercase text-orange-500 mb-1">
-                        {project.category}
-                      </span>
-                      <h3 className="font-bold text-xl text-white">
-                        {project.name}
-                      </h3>
+                <a key={idx} href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <div className="relative bg-black hover:border-none border-orange-500 rounded-xl h-70 md:h-96 pb-2 flex flex-col justify-end  transition-all duration-800 ease-in-out transform hover:scale-105 overflow-hidden  flex-shrink-0 " >
+
+                    <img
+                      src={project.image}
+                      alt={`brand-img-col1-${idx}`}
+                      className="w-full h-full object-fill transition-all  "
+                    />
+
+                    <div className="  bg-black/70  p-4 backdrop-blur-sm rounded-xl inline-flex items-center justify-between shadow-2xl transition duration-300 translate-y-2 group-hover:translate-y-0">
+                      <div className="flex flex-col">
+                        <span className="text-xs font-medium uppercase text-orange-500 mb-1">
+                          {project.category}
+                        </span>
+                        <h3 className="font-bold text-xl text-white">
+                          {project.name}
+                        </h3>
+                      </div>
+
+
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View case study for ${project.name}`}
+                        className="w-12 h-12 flex-shrink-0 bg-orange-600 hover:bg-orange-700 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:rotate-45 shadow-lg"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <ArrowRight className="w-6 h-6 text-white" />
+                      </a>
                     </div>
-
-                    
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View case study for ${project.name}`}
-                      className="w-12 h-12 flex-shrink-0 bg-orange-600 hover:bg-orange-700 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:rotate-45 shadow-lg"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                    >
-                      <ArrowRight className="w-6 h-6 text-white" />
-                    </a>
                   </div>
-                </div>
                 </a>
 
 
