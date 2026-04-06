@@ -67,6 +67,15 @@ const advantageData = [
   },
 ];
 
+const processSteps = [
+  { step: "Step 1", title: "Discover", stage: "Egg Stage", image: "/step1.png" },
+  { step: "Step 2", title: "Plan", stage: "Larva Stage", image: "/step1.png" },
+  { step: "Step 3", title: "Build", stage: "Pupa Stage", image: "/step1.png" },
+  { step: "Step 4", title: "Launch", stage: "Bee Stage", image: "/step1.png" },
+  { step: "Step 5", title: "Grow", stage: "Hive Stage", image: "/step1.png" },
+  // { step: "Step 6", title: "Scale", stage: "Honey Stage", image: "/step1.png" },
+];
+
 const outcomesData = [
   { icon: "/brandingOutcomes/trusted.svg", title: "Trusted 50+ brand" },
   { icon: "/brandingOutcomes/brandRecog.svg", title: "Brand recognition" },
@@ -86,7 +95,13 @@ export default function HomePageClient() {
   const strategicStickyRef = useRef(null);
   const outcomesRef = useRef([]);
   const avatarsRef = useRef([]);
+  const servicesRef = useRef(null);
+  const leadershipRef = useRef(null);
+  const advantageRef = useRef(null);
   const teamMembersRef = useRef([]);
+  const processSectionRef = useRef(null);
+  const processViewportRef = useRef(null);
+  const processSliderRef = useRef(null);
 
   const handleMouseEnter = () => {
     const tl = gsap.timeline();
@@ -126,6 +141,33 @@ export default function HomePageClient() {
   useEffect(() => {
     // Leadership Section Animations
     const ctx = gsap.context(() => {
+      // Process section horizontal slide animation
+      if (
+        processSectionRef.current &&
+        processViewportRef.current &&
+        processSliderRef.current
+      ) {
+        const processSection = processSectionRef.current;
+        const processViewport = processViewportRef.current;
+        const processSlider = processSliderRef.current;
+        const getScrollDistance = () =>
+          Math.max(0, processSlider.scrollWidth - processViewport.clientWidth);
+
+        gsap.to(processSlider, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: processSection,
+            start: "top top",
+            end: () => `+=${getScrollDistance()}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+
       // Header Animation
       gsap.from(".leadership-header", {
         opacity: 0,
@@ -176,162 +218,25 @@ export default function HomePageClient() {
         },
       });
 
-      // -- Strategic Studio Pinning --
-      if (strategicStickyRef.current) {
-        ScrollTrigger.create({
-          trigger: ".strategic-studio",
-          start: "top top",
-          end: "bottom bottom",
-          pin: strategicStickyRef.current,
-          pinSpacing: false,
-          scrub: true,
-          invalidateOnRefresh: true,
-        });
-      }
-
-      // -- Horizontal Pin Section --
-      const horizontalContainer = document.querySelector(
-        ".horizontal-text-container",
-      );
-      if (horizontalContainer) {
-        // Horizontal Slide
-        gsap.to(horizontalContainer, {
-          x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".horizontal-section",
-            start: "top top",
-            end: () => `+=${horizontalContainer.scrollWidth}`, // Longer scroll
-            scrub: 1.2,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        // Rotation
-        gsap.to(".rotating-badge-container", {
-          rotate: 1080, // Multiple rotations
-          scrollTrigger: {
-            trigger: ".horizontal-section",
-            start: "top top",
-            end: () => `+=${horizontalContainer.scrollWidth}`,
-            scrub: 1.2,
-          },
-        });
-      }
-    }, pageRef); // Use pageRef for full-page scope
+      // -- Proof & CTA Animations --
+      gsap.from(".proof-item", {
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".proof-section",
+          start: "top 85%",
+        },
+      });
+    }, advantageRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main ref={pageRef} className="w-full">
-      {/* Strategic Studio Section */}
-      {/* Strategic Studio Section */}
-      <section className="strategic-studio relative pt-[150px] ">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-          {/* Left Column (Scrollable Text) */}
-          <div className="flex flex-col pt-24 pb-18">
-            {/* Top Block */}
-            <div className="flex justify-between w-[1200px]">
-              <div className="max-w-[500px]">
-                <h2 className="text-[48px] font-stk-bureau leading-[57px] text-[#070707] tracking-[-2%] mb-8">
-                  We're a strategic <br />
-                  Branding{" "}
-                  <span className="font-medium font-resonate tracking-[-0.04em]">
-                    studio
-                  </span>{" "}
-                  built on clarity & systems.
-                </h2>
-              </div>
-              <div className="max-w-[500px]">
-                <p className="text-[20px] font-stk-bureau text-[#070707] leading-[27px]">
-                  We build brands & digital
-                  <br />
-                  products for lasting success
-                </p>
-                <p className="text-[14px] leading-[20px] font-resonate mt-4 text-[#070707]">
-                  Beeztech.studio
-                  <br />
-                  @2026
-                </p>
-              </div>
-            </div>
-
-            {/* Center Block */}
-            <div className="w-[1100px] flex flex-col items-center mt-[132px] justify-center pointer-events-none">
-              <p className="text-[20px] font-normal font-stk-bureau text-left leading-[27px]">
-                <span className="font-medium font-resonate">Global</span>{" "}
-                creative
-                <br />& Technology{" "}
-                <span className="font-medium font-resonate">agency.</span>
-              </p>
-            </div>
-
-            {/* Bottom Block */}
-            <div className="max-w-[600px] mt-[250px]">
-              <p className="text-[#070707] font-resonate font-normal text-[14px] lg:text-[16px] mb-8 leading-[100%]">
-                Inside Beeztech Studio
-              </p>
-              <h3 className="text-[42px] font-stk-bureau font-normal leading-[55px] text-[#070707]">
-                We are consultants <br /> and craftspeople,
-                <br />
-                <span className="font-medium font-resonate">brands</span> with
-                tailored web <br />
-                solutions, from selective
-                <br />
-                <span className="font-medium font-resonate">
-                  collaboration
-                </span>{" "}
-                to complete <br /> digital service, with an unwavering
-                commitment to 🍯{" "}
-                <span className="font-medium font-resonate">quality</span>.
-              </h3>
-            </div>
-
-            {/* Stats Block */}
-            <div className="flex gap-24 mt-26">
-              <div className="flex flex-col gap-4">
-                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
-                  30+
-                </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
-                  Industry Partners
-                </span>
-              </div>
-              <div className="flex flex-col gap-4 ml-8">
-                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
-                  97%
-                </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
-                  Client Retention Rate
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column (Sticky Visual) */}
-          <div
-            ref={strategicStickyRef}
-            className="relative h-screen hidden  overflow-hidden  lg:flex items-center justify-center pt-20"
-          >
-            {/* Background Hexagon Pattern */}
-            <div className="absolute inset-0 right-[-290px] top-[20%] pointer-events-none select-none">
-              <img src="/grid.svg" alt="" />
-            </div>
-
-            {/* Main Visual Image (Bee/Flower) */}
-            <div className="relative w-full flex items-center justify-center">
-              <img
-                src="/heroGif.gif"
-                alt="Bee Visual"
-                className="-scale-x-100 rotate-[-50deg] w-full h-auto max-h-[80vh]  mb-62 object-contain mr-[-5vw]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+    <main className="w-full">
 
       {/* Trusted By & CTA Section */}
       <section
@@ -428,7 +333,7 @@ export default function HomePageClient() {
         <div className="max-w-full mx-auto text-center z-10 relative">
           {/* Quote */}
           <div className="mb-8 max-w-[900px] mx-auto">
-            <h2 className="text-[32px] md:text-[42px] leading-[62px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
+            <h2 className="text-[32px] md:text-[42px] leading-[48px] lg:text-[48px] tracking-[-1.2%] text-[#070707] font-normal font-stk-bureau">
               According to{" "}
               <span className="font-medium font-resonate">
                 aerodynamic theory
@@ -474,6 +379,108 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
+
+      {/* Beeztech Process Section */}
+      <section
+        ref={processSectionRef}
+        className="relative py-24 px-6 lg:px-12 overflow-hidden"
+        style={{
+
+          backgroundSize: "42px 42px",
+
+        }}
+      >
+        <div className="max-w-[1800px] mx-auto">
+          <div className="flex flex-col xl:flex-row xl:items-center gap-4 xl:gap-6 min-h-[520px]">
+            <div className="w-auto xl:w-[auto] xl:flex-shrink-0 xl:pt-0 pr-4">
+              <p className="text-[#070707] font-resonate font-normal text-[14px] md:text-[14px] leading-[100%]">
+                We build solutions step by step.
+              </p>
+              <h2 className="text-[36px] md:text-[36px] font-[500] lg:text-[36px] leading-[1.1] text-[#070707] font-resonate tracking-[-1.2%]">
+                Beeztech <span className="font-stk-bureau font-[400]">process</span>
+              </h2>
+            </div>
+
+            <div
+              ref={processViewportRef}
+              className="relative flex-1 min-h-[460px] md:min-h-[540px] overflow-hidden flex items-center"
+            >
+              <div
+                ref={processSliderRef}
+                className="process-slider flex ml-20 items-start gap-7 md:gap-7 w-max pr-12 mx-auto"
+              >
+                {processSteps.map((item, index) => (
+                  <div key={item.step} className="relative flex-shrink-0 w-[260px]">
+                    <div className="relative mx-auto h-[282px] w-[243px] rounded-[5px]">
+                      <svg
+                        viewBox="0 0 244 282"
+                        className="absolute inset-0 h-full w-full"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M241.009 68.8218C242.551 69.7163 243.5 71.364 243.5 73.1466V208.289C243.5 210.071 242.551 211.719 241.009 212.614L124.413 280.261C122.861 281.162 120.944 281.161 119.392 280.259L2.98778 212.614C1.44766 211.719 0.5 210.073 0.5 208.291L0.5 73.1443C0.5 71.363 1.44767 69.7162 2.98779 68.8212L119.392 1.17648C120.944 0.274536 122.861 0.273865 124.413 1.17474L241.009 68.8218Z"
+                          fill="white"
+                          fillOpacity="0.6"
+                          stroke="#070707"
+                          strokeOpacity="0.1"
+                          strokeMiterlimit="10"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <Image
+                          src={item.image}
+                          alt={`${item.title} stage visual`}
+                          width={155}
+                          height={168}
+                          className="w-[155px] h-[168px] object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    {index < processSteps.length && (
+                      <svg
+                        className="absolute left-[-5%] top-35 z-20 -translate-y-1/2 -translate-x-1/2"
+                        width="88"
+                        height="38"
+                        viewBox="0 0 88 38"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.2 1.6C11.76 0.64 12.8 0 13.92 0L74.08 0C75.2 0 76.24 0.64 76.8 1.6L87.2 17.44C87.92 18.48 87.92 19.92 87.2 20.96L76.8 36.8C76.24 37.76 75.2 38.4 74.08 38.4L13.92 38.4C12.8 38.4 11.76 37.76 11.2 36.8L0.8 20.96C0.08 19.92 0.08 18.48 0.8 17.44Z"
+                          fill="white"
+                          fillOpacity="1"
+                          stroke="#d0d0d0"
+                          strokeWidth="1"
+                        />
+                        <text
+                          x="44"
+                          y="25"
+                          textAnchor="middle"
+                          fontFamily="var(--font-resonate, sans-serif)"
+                          fontSize="16"
+                          fontWeight="500"
+                          fill="#070707"
+                        >
+                          {item.step}
+                        </text>
+                      </svg>
+                    )}
+
+                    <div className="text-center text-[18px] mt-8">
+                      <h3 className="text-[18px] leading-none text-[#070707] font-stk-bureau">
+                        <span className=" font-resonate  font-[600]">{item.title}</span>{" "}
+                        <span className="font-normal">({item.stage})</span>
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Advantage Section */}
       <section>
