@@ -176,7 +176,7 @@ export default function HomePageClient() {
         },
       });
 
-      // -- Strategic Studio Pinning -- 
+      // -- Strategic Studio Pinning --
       if (strategicStickyRef.current) {
         ScrollTrigger.create({
           trigger: ".strategic-studio",
@@ -232,7 +232,7 @@ export default function HomePageClient() {
       <section className="strategic-studio relative pt-[150px] ">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Left Column (Scrollable Text) */}
-          <div className="flex flex-col pt-24 pb-48">
+          <div className="flex flex-col pt-24 pb-18">
             {/* Top Block */}
             <div className="flex justify-between w-[1200px]">
               <div className="max-w-[500px]">
@@ -326,7 +326,7 @@ export default function HomePageClient() {
               <img
                 src="/heroGif.gif"
                 alt="Bee Visual"
-                className="-scale-x-100 rotate-[-50deg] w-full h-auto max-h-[80vh]  object-contain mr-[-5vw]"
+                className="-scale-x-100 rotate-[-50deg] w-full h-auto max-h-[80vh]  mb-62 object-contain mr-[-5vw]"
               />
             </div>
           </div>
