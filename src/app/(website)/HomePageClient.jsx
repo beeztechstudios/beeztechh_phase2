@@ -67,26 +67,15 @@ const advantageData = [
   },
 ];
 
-const outcomesData = [
-  { icon: "/brandingOutcomes/trusted.svg", title: "Trusted 50+ brand" },
-  { icon: "/brandingOutcomes/brandRecog.svg", title: "Brand recognition" },
-  {
-    icon: "/brandingOutcomes/premiumPerception.svg",
-    title: "Premium perception",
-  },
-  { icon: "/brandingOutcomes/highConversion.svg", title: "Higher conversions" },
-  {
-    icon: "/brandingOutcomes/lowerMarketingCost.svg",
-    title: "Lower marketing cost",
-  },
-];
-
 export default function HomePageClient() {
   const pageRef = useRef(null);
   const strategicStickyRef = useRef(null);
   const outcomesRef = useRef([]);
   const avatarsRef = useRef([]);
   const teamMembersRef = useRef([]);
+  const processSectionRef = useRef(null);
+  const processViewportRef = useRef(null);
+  const processSliderRef = useRef(null);
 
   const handleMouseEnter = () => {
     const tl = gsap.timeline();
@@ -126,6 +115,33 @@ export default function HomePageClient() {
   useEffect(() => {
     // Leadership Section Animations
     const ctx = gsap.context(() => {
+      // Process section horizontal slide animation
+      if (
+        processSectionRef.current &&
+        processViewportRef.current &&
+        processSliderRef.current
+      ) {
+        const processSection = processSectionRef.current;
+        const processViewport = processViewportRef.current;
+        const processSlider = processSliderRef.current;
+        const getScrollDistance = () =>
+          Math.max(0, processSlider.scrollWidth - processViewport.clientWidth);
+
+        gsap.to(processSlider, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: processSection,
+            start: "top top",
+            end: () => `+=${getScrollDistance()}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+
       // Header Animation
       gsap.from(".leadership-header", {
         opacity: 0,
@@ -226,113 +242,8 @@ export default function HomePageClient() {
   }, []);
 
   return (
-    <main ref={pageRef} className="w-full">
-      {/* Strategic Studio Section */}
-      {/* Strategic Studio Section */}
-      <section className="strategic-studio relative pt-[150px] ">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-          {/* Left Column (Scrollable Text) */}
-          <div className="flex flex-col pt-24 pb-18">
-            {/* Top Block */}
-            <div className="flex justify-between w-[1200px]">
-              <div className="max-w-[500px]">
-                <h2 className="text-[48px] font-stk-bureau leading-[57px] text-[#070707] tracking-[-2%] mb-8">
-                  We're a strategic <br />
-                  Branding{" "}
-                  <span className="font-medium font-resonate tracking-[-0.04em]">
-                    studio
-                  </span>{" "}
-                  built on clarity & systems.
-                </h2>
-              </div>
-              <div className="max-w-[500px]">
-                <p className="text-[20px] font-stk-bureau text-[#070707] leading-[27px]">
-                  We build brands & digital
-                  <br />
-                  products for lasting success
-                </p>
-                <p className="text-[14px] leading-[20px] font-resonate mt-4 text-[#070707]">
-                  Beeztech.studio
-                  <br />
-                  @2026
-                </p>
-              </div>
-            </div>
-
-            {/* Center Block */}
-            <div className="w-[1100px] flex flex-col items-center mt-[132px] justify-center pointer-events-none">
-              <p className="text-[20px] font-normal font-stk-bureau text-left leading-[27px]">
-                <span className="font-medium font-resonate">Global</span>{" "}
-                creative
-                <br />& Technology{" "}
-                <span className="font-medium font-resonate">agency.</span>
-              </p>
-            </div>
-
-            {/* Bottom Block */}
-            <div className="max-w-[600px] mt-[250px]">
-              <p className="text-[#070707] font-resonate font-normal text-[14px] lg:text-[16px] mb-8 leading-[100%]">
-                Inside Beeztech Studio
-              </p>
-              <h3 className="text-[42px] font-stk-bureau font-normal leading-[55px] text-[#070707]">
-                We are consultants <br /> and craftspeople,
-                <br />
-                <span className="font-medium font-resonate">brands</span> with
-                tailored web <br />
-                solutions, from selective
-                <br />
-                <span className="font-medium font-resonate">
-                  collaboration
-                </span>{" "}
-                to complete <br /> digital service, with an unwavering
-                commitment to 🍯{" "}
-                <span className="font-medium font-resonate">quality</span>.
-              </h3>
-            </div>
-
-            {/* Stats Block */}
-            <div className="flex gap-24 mt-26">
-              <div className="flex flex-col gap-4">
-                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
-                  30+
-                </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
-                  Industry Partners
-                </span>
-              </div>
-              <div className="flex flex-col gap-4 ml-8">
-                <span className="text-[96px] font-normal leading-[100%] font-stk-bureau tracking-[-2%]">
-                  97%
-                </span>
-                <span className="text-[20px] font-normal leading-[27px] font-stk-bureau">
-                  Client Retention Rate
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column (Sticky Visual) */}
-          <div
-            ref={strategicStickyRef}
-            className="relative h-screen hidden  overflow-hidden  lg:flex items-center justify-center pt-20"
-          >
-            {/* Background Hexagon Pattern */}
-            <div className="absolute inset-0 right-[-290px] top-[20%] pointer-events-none select-none">
-              <img src="/grid.svg" alt="" />
-            </div>
-
-            {/* Main Visual Image (Bee/Flower) */}
-            <div className="relative w-full flex items-center justify-center">
-              <img
-                src="/heroGif.gif"
-                alt="Bee Visual"
-                className="-scale-x-100 rotate-[-50deg] w-full h-auto max-h-[80vh]  mb-62 object-contain mr-[-5vw]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <main className="w-full">
+     
       {/* Trusted By & CTA Section */}
       <section
         className="proof-section relative py-24 px-6 lg:px-12 bg-white"
@@ -474,6 +385,7 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
+
 
       {/* Advantage Section */}
       <section>
